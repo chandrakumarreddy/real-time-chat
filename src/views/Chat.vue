@@ -4,17 +4,24 @@
 			<div class="card-content">
 				<div class="content">
 					<h1 class="heading">vue-chat</h1>
-					<div class="chat__flex" v-if="messages">
+					<div
+						class="chat__flex"
+						v-if="messages"
+						v-for="message in messages"
+						:key="message.id"
+					>
 						<div
 							class="chat__flex--content chat__flex--content--name"
 						>
-							name
+							{{ message.name }}
 						</div>
-						<div class="chat__flex--content">message</div>
+						<div class="chat__flex--content">
+							{{ message.message }}
+						</div>
 						<div
 							class="chat__flex--content chat__flex--content--time"
 						>
-							time
+							{{ message.timestamp }}
 						</div>
 					</div>
 				</div>
@@ -42,7 +49,17 @@ export default {
 	created() {
 		const ref = db.collection("chatter").orderBy("timestamp");
 		ref.onSnapshot(snapshot => {
-			snapshot.docChanges();
+			snapshot.docChanges().forEach(change => {
+				if (change.type === "added") {
+					let doc = change.doc;
+					this.messages.push({
+						name: doc.data().name,
+						message: doc.data().message,
+						timestamp: doc.data().timestamp,
+						id: doc.id
+					});
+				}
+			});
 		});
 	}
 };

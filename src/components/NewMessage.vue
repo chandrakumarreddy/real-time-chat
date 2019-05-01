@@ -26,20 +26,18 @@ export default {
 	methods: {
 		addMessage() {
 			if (this.message) {
-				return db
-					.collection("chatter")
+				db.collection("chatter")
 					.add({
 						name: this.name,
 						message: this.message,
 						timestamp: Date.now()
 					})
-					.then(() => {
-						this.message = null;
-						this.feedback = null;
-					})
 					.catch(err => err);
+				this.feedback = null;
+				this.message = null;
+			} else {
+				this.feedback = "please enter a valid message";
 			}
-			this.feedback = "please enter a valid message";
 		}
 	}
 };
