@@ -2,7 +2,7 @@
 	<div id="chat">
 		<div class="card">
 			<div class="card-content">
-				<div class="content">
+				<div class="content chat__container" v-chat-scroll>
 					<h1 class="heading">vue-chat</h1>
 					<div
 						class="chat__flex"
@@ -70,6 +70,21 @@ export default {
 #chat {
 	max-width: 700px;
 	margin: 100px auto;
+}
+.chat__container {
+	max-height: 350px;
+	overflow: auto;
+}
+.chat__container::-webkit-scrollbar {
+	width: 3px;
+}
+
+.chat__container::-webkit-scrollbar-track {
+	background: #ddd;
+}
+
+.chat__container::-webkit-scrollbar-thumb {
+	background: #aaa;
 }
 .chat__flex {
 	display: flex;
