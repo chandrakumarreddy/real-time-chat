@@ -40,9 +40,9 @@ export default {
 		NewMessage
 	},
 	created() {
-		const ref = db.collections("chatter").orderBy("timestamp");
+		const ref = db.collection("chatter").orderBy("timestamp");
 		ref.onSnapshot(snapshot => {
-			console.log(snapshot.docChanges());
+			snapshot.docChanges();
 		});
 	}
 };

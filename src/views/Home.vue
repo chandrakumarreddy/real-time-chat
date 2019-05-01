@@ -36,7 +36,7 @@ export default {
 	methods: {
 		addName() {
 			if (this.name) {
-				this.$router.push({
+				return this.$router.push({
 					name: "Chat",
 					params: { name: this.name }
 				});

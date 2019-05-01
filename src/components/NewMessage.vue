@@ -2,7 +2,12 @@
 	<div id="newMessage">
 		<form @submit.prevent="addMessage">
 			<div class="control">
-				<input type="text" class="input" v-model="message" />
+				<input
+					type="text"
+					class="input"
+					v-model="message"
+					autocomplete="off"
+				/>
 			</div>
 			<div vif="feedback">{{ feedback }}</div>
 		</form>
@@ -21,8 +26,8 @@ export default {
 	methods: {
 		addMessage() {
 			if (this.message) {
-				console.log("submitted", this.message);
-				db.collection("chatter")
+				return db
+					.collection("chatter")
 					.add({
 						name: this.name,
 						message: this.message,

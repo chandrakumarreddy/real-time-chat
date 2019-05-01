@@ -17,7 +17,13 @@ export default new Router({
 			path: "/chat",
 			name: "Chat",
 			component: () => import("./views/Chat.vue"),
-			props: true
+			props: true,
+			beforeEnter: (to, from, next) => {
+				if (to.params.name) {
+					return next();
+				}
+				return next({ name: "home" });
+			}
 		}
 	]
 });
