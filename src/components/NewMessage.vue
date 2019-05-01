@@ -10,6 +10,8 @@
 </template>
 
 <script>
+import db from "@/firebase/init";
+
 export default {
 	name: "NewMessage",
 	props: ["name"],
@@ -20,7 +22,17 @@ export default {
 		addMessage() {
 			if (this.message) {
 				console.log("submitted", this.message);
-				this.feedback = null;
+				db.collection("chatter")
+					.add({
+						name: this.name,
+						message: this.message,
+						timestamp: Date.now()
+					})
+					.then(() => {
+						this.message = null;
+						this.feedback = null;
+					})
+					.catch(err => err);
 			}
 			this.feedback = "please enter a valid message";
 		}
