@@ -2,11 +2,14 @@
 	<div id="chat">
 		<div class="card">
 			<div class="card-content">
-				<div class="content chat__container" v-chat-scroll>
-					<h1 class="heading">vue-chat</h1>
+				<h1 class="heading">vue-chat</h1>
+				<div
+					class="content chat__container"
+					v-chat-scroll
+					v-if="messages"
+				>
 					<div
 						class="chat__flex"
-						v-if="messages"
 						v-for="message in messages"
 						:key="message.id"
 					>
@@ -100,5 +103,9 @@ export default {
 .chat__flex--content--time {
 	font-style: italic;
 	font-weight: 300;
+}
+.heading {
+	text-align: center;
+	font-size: 30px;
 }
 </style>
