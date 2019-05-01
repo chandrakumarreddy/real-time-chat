@@ -32,6 +32,7 @@
 </template>
 
 <script>
+import moment from "moment";
 import NewMessage from "@/components/NewMessage";
 import db from "../firebase/init";
 
@@ -55,7 +56,7 @@ export default {
 					this.messages.push({
 						name: doc.data().name,
 						message: doc.data().message,
-						timestamp: doc.data().timestamp,
+						timestamp: moment(doc.data().timestamp).format("lll"),
 						id: doc.id
 					});
 				}
